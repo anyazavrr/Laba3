@@ -12,10 +12,8 @@ public:
     baseacid(int k);
     baseacid(string s);
     string getfullname() const;
-    /*virtual int func()
-    {
-        return 0;
-    }*/
+    virtual int func() = 0;
+
 };
 
 #endif // BASEACID_H

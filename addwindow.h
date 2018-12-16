@@ -15,7 +15,7 @@ public:
     explicit addwindow(QWidget *parent = 0);
     ~addwindow();
     std::string name;
-    QString name2;
+    QString nameqstring;
     
 private slots:
     void on_ok_1_clicked();

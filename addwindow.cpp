@@ -8,6 +8,8 @@ addwindow::addwindow(QWidget *parent) :
     ui(new Ui::addwindow)
 {
     ui->setupUi(this);
+    name = "";
+    nameqstring = "";
 }
 
 addwindow::~addwindow()
@@ -17,10 +19,9 @@ addwindow::~addwindow()
 
 void addwindow::on_ok_1_clicked()
 {
-    QString aname = ui->acidname->text();
     close();
-    name2 = aname;
-    name = aname.toStdString();
+    nameqstring = ui->acidname->text();
+    name = nameqstring.toStdString();
 
 }
 

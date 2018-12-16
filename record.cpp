@@ -60,14 +60,24 @@ void record::setacid(string s)
 
     }
 }
-record::~record()
+/*record::~record()
 {
     delete(acid);
     delete(next);
     delete(prev);
+}*/
+iter &iter::operator++()
+{
+    if(curr->next!=NULL)
+    curr = curr->next;
+    return *this;
 }
-
-
+iter &iter::operator--()
+{
+    if(curr->prev!=NULL)
+    curr = curr->prev;
+    return *this;
+}
 
 
 

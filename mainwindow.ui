@@ -25,42 +25,42 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="adding">
        <property name="text">
         <string>Добавить кислоту</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="delone">
        <property name="text">
         <string>Удалить кистоту</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="delall">
        <property name="text">
         <string>Удалить все кислоты</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="read">
        <property name="text">
         <string>Прочитать из файла</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="write">
        <property name="text">
         <string>Записать в файл</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="plus">
        <property name="text">
         <string>Сложить</string>
        </property>
@@ -77,41 +77,53 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(241, 255, 228);
+font: 75 10pt &quot;Microsoft YaHei UI Light&quot;;</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="prot_1">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>70</y>
+      <x>220</x>
+      <y>60</y>
       <width>131</width>
-      <height>16</height>
+      <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(241, 255, 228);
+font: 75 10pt &quot;Microsoft YaHei UI Light&quot;;</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="prot_2">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>150</y>
-      <width>111</width>
-      <height>20</height>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(241, 255, 228);
+font: 75 10pt &quot;Microsoft YaHei UI Light&quot;;</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton">
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>110</y>
+      <y>30</y>
       <width>73</width>
       <height>21</height>
      </rect>
@@ -124,7 +136,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>30</y>
+      <y>110</y>
       <width>73</width>
       <height>21</height>
      </rect>

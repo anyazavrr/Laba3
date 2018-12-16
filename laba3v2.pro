@@ -18,7 +18,9 @@ SOURCES += main.cpp\
     record.cpp \
     specialacid.cpp \
     addwindow.cpp \
-    delwindow.cpp
+    delwindow.cpp \
+    warning.cpp \
+    input.cpp
 
 HEADERS  += mainwindow.h \
     aminoacid.h \
@@ -27,8 +29,12 @@ HEADERS  += mainwindow.h \
     record.h \
     specialacid.h \
     addwindow.h \
-    delwindow.h
+    delwindow.h \
+    warning.h \
+    input.h
 
 FORMS    += mainwindow.ui \
     addwindow.ui \
-    delwindow.ui
+    delwindow.ui \
+    warning.ui \
+    input.ui
