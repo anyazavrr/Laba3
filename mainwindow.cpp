@@ -205,8 +205,7 @@ void MainWindow::on_read_clicked()
         {
             if (ui->radioButton->isChecked())
             {
-                protein p;
-                p1 = p;
+                p1.deleteall();
                 ifstream file;
                 QByteArray ba = win.filename.toLatin1();
                 const char *c = ba.data();
@@ -223,8 +222,7 @@ void MainWindow::on_read_clicked()
                         ++it;
                     }
                     while(i==0);
-
-                 const char *c1 = s.c_str();
+                const char *c1 = s.c_str();
                 ui->prot_1->setText(QString::fromUtf8(c1));
                 file.close();
             }
@@ -258,4 +256,32 @@ else
         win2.setModal(true);
         win2.exec();
     }
+}
+
+void MainWindow::on_write_clicked()
+{
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+        input win;
+        win.setModal(true);
+        win.exec();
+        if(win.filename!="")
+        {
+
+            if (ui->radioButton->isChecked())
+            {
+                p1.writefile(win.filename.toStdString());
+            }
+            else if(ui->radioButton_2->isChecked())
+            {
+                p2.writefile(win.filename.toStdString());
+            }
+        }
+    }
+    else
+        {
+            warning win2;
+            win2.setModal(true);
+            win2.exec();
+        }
 }

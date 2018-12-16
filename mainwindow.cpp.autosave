@@ -1,0 +1,385 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "addwindow.h"
+#include "warning.h"
+#include "delwindow.h"
+#include "input.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    ui->delone->setEnabled(false);
+    ui->delall->setEnabled(false);
+    ui->label->hide();
+    ui->result->hide();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_adding_clicked()
+{
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+        addwindow win;
+        win.setModal(true);
+        win.exec();
+        if(win.nameqstring!="")
+        {
+            if (ui->radioButton->isChecked())
+            {
+                p1.add(win.name);
+                iter it = p1.getbegin_iter();
+                std::string s = "";
+                int i = 0;
+                do
+                {
+                    s = s + " " + it.getshortname();
+                    if(it==p1.getend_iter()) i =1;
+                    ++it;
+                }
+                while(i==0);
+                const char *c1 = s.c_str();
+                ui->prot_1->setText(QString::fromUtf8(c1));
+            }
+            else if (ui->radioButton_2->isChecked())
+            {
+                p2.add(win.name);
+                iter it = p2.getbegin_iter();
+                std::string s = "";
+                int i = 0;
+                do
+                {
+                    s = s + " " + it.getshortname();
+                    if(it==p2.getend_iter()) i =1;
+                    ++it;
+                }
+                while(i==0);
+                const char *c1 = s.c_str();
+                ui->prot_2->setText(QString::fromUtf8(c1));
+            }
+            ui->delone->setEnabled(true);
+            ui->delall->setEnabled(true);
+        }
+    }
+    else
+    {
+        warning win;
+        win.setModal(true);
+        win.exec();
+    }
+}
+
+void MainWindow::on_delone_clicked()
+{
+
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+        delwindow win;
+        if (ui->radioButton->isChecked()) win.it  = p1.getbegin_iter();
+        if (ui->radioButton_2->isChecked()) win.it = p2.getbegin_iter();
+        win.setModal(true);
+        win.exec();
+        if(win.flag == true)
+        {
+            if (ui->radioButton->isChecked())
+            {
+                p1.deleterecord(win.it);
+                if(p1.count()>0)
+                {
+                    iter it = p1.getbegin_iter();
+                    std::string s = "";
+                    int i = 0;
+                    do
+                    {
+                        s = s + " " + it.getshortname();
+                        if(it==p1.getend_iter()) i =1;
+                        ++it;
+                    }
+                    while(i==0);
+                    const char *c1 = s.c_str();
+                    ui->prot_1->setText(QString::fromUtf8(c1));
+                }
+                else
+                {
+                    ui->prot_1->setText("");
+                }
+            }
+            else if (ui->radioButton_2->isChecked())
+            {
+                p2.deleterecord(win.it);
+                if(p2.count()>0)
+                {
+                    iter it = p2.getbegin_iter();
+                    std::string s = "";
+                    int i = 0;
+                    do
+                    {
+                        s = s + " " + it.getshortname();
+                        if(it==p2.getend_iter()) i =1;
+                        ++it;
+                    }
+                    while(i==0);
+                    const char *c1 = s.c_str();
+                    ui->prot_2->setText(QString::fromUtf8(c1));
+                }
+                else ui->prot_1->setText("");
+
+            }
+        }
+
+    }
+    else
+    {
+        warning win;
+        win.setModal(true);
+        win.exec();
+    }
+
+}
+
+void MainWindow::on_delall_clicked()
+{
+
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+            if (ui->radioButton->isChecked())
+            {
+                p1.deleteall();
+                ui->prot_1->setText("");
+            }
+            else if (ui->radioButton_2->isChecked())
+            {
+                p2.deleteall();
+                ui->prot_2->setText("");
+            }
+            ui->delone->setEnabled(false);
+            ui->delall->setEnabled(false);
+    }
+    else
+    {
+        warning win;
+        win.setModal(true);
+        win.exec();
+    }
+}
+
+void MainWindow::on_radioButton_clicked()
+{
+    if(p1.count()>0)
+    {
+        ui->delone->setEnabled(true);
+        ui->delall->setEnabled(true);
+    }
+    else
+    {
+        ui->delone->setEnabled(false);
+        ui->delall->setEnabled(false);
+    }
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    if(p2.count()>0)
+    {
+        ui->delone->setEnabled(true);
+        ui->delall->setEnabled(true);
+    }
+    else
+    {
+        ui->delone->setEnabled(false);
+        ui->delall->setEnabled(false);
+    }
+}
+
+void MainWindow::on_read_clicked()
+{
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+        input win;
+        win.setModal(true);
+        win.exec();
+        if(win.filename!="")
+        {
+            if (ui->radioButton->isChecked())
+            {
+                p1.deleteall();
+                ifstream file;
+                QByteArray ba = win.filename.toLatin1();
+                const char *c = ba.data();
+                file.open(c);
+                file>>p1;
+                iter it = p1.getbegin_iter();
+                std::string s = "";
+                int i = 0;
+                    do
+                    {
+
+                        s = s + " " + it.getshortname();
+                        if(it==p1.getend_iter()) i =1;
+                        ++it;
+                    }
+                    while(i==0);
+                const char *c1 = s.c_str();
+                ui->prot_1->setText(QString::fromUtf8(c1));
+                file.close();
+            }
+            else if(ui->radioButton_2->isChecked())
+            {
+                p2.deleteall();
+                ifstream file;
+                QByteArray ba = win.filename.toLatin1();
+                const char *c = ba.data();
+                file.open(c);
+                file>>p2;
+                iter it = p2.getbegin_iter();
+                std::string s = "";
+                int i = 0;
+                do
+                {
+                    s = s + " " + it.getshortname();
+                    if(it==p2.getend_iter()) i =1;
+                    ++it;
+                }
+                while(i==0);
+                const char *c1 = s.c_str();
+                ui->prot_2->setText(QString::fromUtf8(c1));
+            }
+            ui->delone->setEnabled(true);
+            ui->delall->setEnabled(true);
+        }
+
+    }
+else
+    {
+        warning win2;
+        win2.setModal(true);
+        win2.exec();
+    }
+}
+
+void MainWindow::on_write_clicked()
+{
+    if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() )
+       {
+        input win;
+        win.setModal(true);
+        win.exec();
+        if(win.filename!="")
+        {
+
+            if (ui->radioButton->isChecked())
+            {
+                p1.writefile(win.filename.toStdString());
+            }
+            else if(ui->radioButton_2->isChecked())
+            {
+                p2.writefile(win.filename.toStdString());
+            }
+        }
+    }
+    else
+        {
+            warning win2;
+            win2.setModal(true);
+            win2.exec();
+        }
+}
+
+void MainWindow::on_plus_clicked()
+{
+    ui->label->show();
+    ui->result->show();
+    int f = 0;
+    if(p1.getbegin()!=NULL && p2.getbegin()!=NULL)
+    {
+        iter r = p1.getbegin_iter();//record* r = p1.getbegin();
+        iter n = p2.getbegin_iter();//record* n = p2.getbegin();
+        while(n!=NULL && r.getshortname()!=n.getshortname())
+        {
+            n = n->next;
+        }
+        if (n!=NULL && r->getacid().getshortname()==n->getacid().getshortname())
+        {
+            while(n!=NULL && r->getacid().getshortname()==n->getacid().getshortname() && n!=p2.getend() && r!=p1.getend())
+            {
+                n = n->next;
+                r = r->next;
+            }
+            if(n== p2.getend() && r->getacid().getshortname()==n->getacid().getshortname())
+            {
+                r = r->next;
+                while(r!=NULL)
+                {
+                    p2.add(r->getacid());
+                    r=r->next;
+                }
+                record* k = p2.getbegin();
+                ui->label->setText("");
+                f++;
+                while(k!=NULL)
+                {
+                   ui->label->setText(ui->label->text()+" "+QChar(k->getacid().getshortname()));
+                   k= k->next;
+                }
+            }
+         }
+        if (f==0)
+        {
+            n = p1.getbegin();
+            r = p2.getbegin();
+            while(n!=NULL && r->getacid().getshortname()!=n->getacid().getshortname())
+            {
+                n = n->next;
+            }
+            if (n!=NULL && r->getacid().getshortname()==n->getacid().getshortname())
+            {
+                while(n!=NULL && r->getacid().getshortname()==n->getacid().getshortname() && n!=p1.getend() && r!=p2.getend())
+                {
+                    n = n->next;
+                    r = r->next;
+                }
+                if(n== p1.getend() && r->getacid().getshortname()==n->getacid().getshortname())
+                {
+                    r = r->next;
+                    while(r!=NULL)
+                    {
+                        p1.add(r->getacid());
+                        r=r->next;
+                    }
+                    record* k = p1.getbegin();
+                    ui->label->setText("");
+                    f++;
+                    while(k!=NULL)
+                    {
+                       ui->label->setText(ui->label->text()+" "+QChar(k->getacid().getshortname()));
+                       k= k->next;
+                    }
+                }
+             }
+     }
+        if(f==0)
+        {
+            record* k = p1.getbegin();
+            record* p = p2.getbegin();
+            ui->label->setText("");
+            f++;
+            while(k!=NULL)
+            {
+               ui->label->setText(ui->label->text()+" "+QChar(k->getacid().getshortname()));
+               k= k->next;
+            }
+            while(p!=NULL)
+            {
+               ui->label->setText(ui->label->text()+" "+QChar(p->getacid().getshortname()));
+               p= p->next;
+            }
+        }
+    }
+}
+
+}

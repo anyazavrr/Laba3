@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sun 16. Dec 14:25:04 2018
+** Created: Sun 16. Dec 15:16:21 2018
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_MainWindow[] = {
       72,   11,   11,   11, 0x08,
       97,   11,   11,   11, 0x08,
      124,   11,   11,   11, 0x08,
+     142,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -46,6 +47,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "on_delone_clicked()\0on_delall_clicked()\0"
     "on_radioButton_clicked()\0"
     "on_radioButton_2_clicked()\0on_read_clicked()\0"
+    "on_write_clicked()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -83,9 +85,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 3: on_radioButton_clicked(); break;
         case 4: on_radioButton_2_clicked(); break;
         case 5: on_read_clicked(); break;
+        case 6: on_write_clicked(); break;
         default: ;
         }
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }
